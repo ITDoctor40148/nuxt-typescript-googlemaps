@@ -20,8 +20,6 @@ export default {
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
     "~/assets/style/global.css",
-    "ag-grid-community/dist/styles/ag-grid.css",
-    "ag-grid-community/dist/styles/ag-theme-alpine.css"
   ],
 
   axios: {
