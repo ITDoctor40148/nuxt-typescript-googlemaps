@@ -10,9 +10,7 @@
       :rowData="rowData"
     >
     </ag-grid-vue> -->
-    <h2 class="text-center">
-      <nuxt-link :to="{ hash: getMarker.countryAndTerritory }">List</nuxt-link>
-    </h2>
+    <h2 class="text-center">List</h2>
     <b-table
       responsive
       striped
@@ -56,6 +54,7 @@
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 import { namespace } from "vuex-class";
+import { isEqual } from "lodash";
 
 import { Marker } from "@/@types/position";
 
@@ -92,7 +91,7 @@ export default class Grid extends Vue {
       setTimeout(
         () =>
           this.$router.push({
-            hash: this.getMarker.countryAndTerritory,
+            hash: `${this.getMarker.countryAndTerritory}-${this.getMarker.dateReported}`,
           }),
         1500
       );
@@ -131,15 +130,15 @@ export default class Grid extends Vue {
 
   public rowClass(item: Marker, type: string) {
     return Object.keys(this.getMarker).length &&
-      this.getMarker.countryAndTerritory === item.countryAndTerritory
+      isEqual(this.getMarker.countryAndTerritory, item.countryAndTerritory)
       ? "table-success"
       : "";
   }
 
   public rowId(item: Marker, type: string) {
     return Object.keys(this.getMarker).length &&
-      this.getMarker.countryAndTerritory === item.countryAndTerritory
-      ? { id: item.countryAndTerritory }
+      isEqual(this.getMarker.countryAndTerritory, item.countryAndTerritory)
+      ? { id: `${item.countryAndTerritory}-${item.dateReported}` }
       : {};
   }
 }

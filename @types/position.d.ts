@@ -16,3 +16,10 @@ export interface Position {
   lat: number;
   lng: number;
 }
+
+export interface Country {
+  countryAndTerritory: string;
+  countryTerritoryCode: string;
+  lat: number;
+  lng: number;
+}
